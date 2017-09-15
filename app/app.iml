@@ -123,6 +123,7 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/build-info" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/check-manifest" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/classes" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/classes-jar" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental-classes" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental-runtime-classes" />
@@ -188,6 +189,7 @@
     <orderEntry type="library" name="support-vector-drawable-25.3.1" level="project" />
     <orderEntry type="library" name="animated-vector-drawable-25.3.1" level="project" />
     <orderEntry type="library" name="support-compat-25.3.1" level="project" />
+    <orderEntry type="module" module-name="MyLib" scope="TEST" />
     <orderEntry type="module" module-name="backend" />
     <orderEntry type="module" module-name="androidlibrary" />
   </component>
