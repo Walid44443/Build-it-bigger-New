@@ -13,49 +13,32 @@ import android.widget.Toast;
 import walid44443.fb.androidlibrary.DisplayJokeActivity;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements onFinishTask {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        new EndpointsAsyncTask(this, "joke", this).execute();
+
 
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
+    private String result = "null";
     public void tellJoke(View view) {
-        new EndpointsAsyncTask(){
-            @Override
-            protected void onPostExecute(String result) {
-                super.onPostExecute(result);
                 Intent intent =new Intent(getApplicationContext(),DisplayJokeActivity.class);
                 intent.putExtra("joke", result);
                 startActivity(intent);
-            }
-        }.execute(new Pair<Context, String>(this, "Manfred"));
     }
 
 
+    @Override
+    public void onSucess(String result) {
+        this.result = result;
+    }
+
+    @Override
+    public void onError() {
+        Toast.makeText(this, "an error occurred, please check connection", Toast.LENGTH_LONG);
+    }
 }

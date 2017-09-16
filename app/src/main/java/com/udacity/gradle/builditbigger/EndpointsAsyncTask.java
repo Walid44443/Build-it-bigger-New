@@ -21,6 +21,8 @@ import java.io.IOException;
 class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> {
     private static MyApi myApiService = null;
     private Context context;
+    private String name;
+    private onFinishTask onFinishTask;
 
     @Override
     protected String doInBackground(Pair<Context, String>... params) {
@@ -42,8 +44,7 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> 
             myApiService = builder.build();
         }
 
-        context = params[0].first;
-        String name = params[0].second;
+        String name = this.name;
 
         try {
             return myApiService.sayHi(name).execute().getData();
@@ -54,6 +55,16 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> 
 
     @Override
     protected void onPostExecute(String result) {
+        if (!result.isEmpty() && result != null)
+            onFinishTask.onSucess(result);
+        else
+            onFinishTask.onError();
         Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+    }
+
+    public EndpointsAsyncTask(Context context, String name, com.udacity.gradle.builditbigger.onFinishTask onFinishTask) {
+        this.context = context;
+        this.name = name;
+        this.onFinishTask = onFinishTask;
     }
 }
